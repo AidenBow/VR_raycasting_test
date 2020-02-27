@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float playerSpeed = .25f;
+    public Vector3 housePosition;
+    public Vector3 targetPosition;
     void Start()
     {
-        
+        targetPosition = gameObject.transform.parent.position;
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         RaycastHit hit; //declare raycast variable
@@ -19,7 +21,17 @@ public class Player : MonoBehaviour
             if (hit.transform.GetComponent<Button> () != null) //if the hit object is the button
             {
                 hit.transform.GetComponent<Button> () .OnLook(); //onlook function from button called
+                MoveToHouse();
             }
         }
+
+        gameObject.transform.parent.position = Vector3.Lerp(gameObject.transform.parent.position, targetPosition, Time.deltaTime * playerSpeed);
+
     }
+
+    private void MoveToHouse ()
+    {
+        targetPosition = housePosition;
+    }
+
 }
