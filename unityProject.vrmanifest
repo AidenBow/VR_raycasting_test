@@ -1,0 +1,16 @@
+{
+  "source": "Unity",
+  "applications": [
+    {
+      "app_key": "application.generated.unity.vr_pov_test.exe",
+      "launch_type": "url",
+      "url": "steam://launch/",
+      "action_manifest_path": "I:\\Documents\\SSD_code_documents\\Unity_Projects\\VR_POV_TEST\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "strings": {
+        "en_us": {
+          "name": "VR_POV_TEST [Testing]"
+        }
+      }
+    }
+  ]
+}
