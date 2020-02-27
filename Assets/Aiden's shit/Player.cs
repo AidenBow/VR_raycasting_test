@@ -9,9 +9,13 @@ public class Player : MonoBehaviour
     public Vector3 housePosition;
     public Vector3 targetPosition;
     public SteamVR_Input_Sources handType;
+    private GameObject rightController;
+    private GameObject rightLaser;
     void Start()
     {
         targetPosition = gameObject.transform.parent.position;
+        rightController = GameObject.Find("Controller (right)");
+        rightLaser = GameObject.Find("rightLaser");
     }
 
     
@@ -30,9 +34,22 @@ public class Player : MonoBehaviour
         gameObject.transform.parent.position = Vector3.Lerp(gameObject.transform.parent.position, targetPosition, Time.deltaTime * playerSpeed);
 
         bool gripActive = SteamVR_Actions.default_GrabGrip.GetState(handType);
+        RaycastHit gripHit;
         if (gripActive)
         {
-            Debug.Log("grabgrip");
+            if (Physics.Raycast(rightController.transform.position, rightController.transform.forward, out gripHit))
+            {
+                if (gripHit.transform.GetComponent<Button>() != null) //if the hit object is the button
+                {
+                    gripHit.transform.GetComponent<Button>().OnLook(); //onlook function from button called
+                    MoveToHouse();
+                }
+            }
+            rightLaser.transform.gameObject.SetActive(true);
+        }
+        else
+        {
+            rightLaser.transform.gameObject.SetActive(false);
         }
     }
 
