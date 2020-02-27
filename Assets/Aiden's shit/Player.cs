@@ -21,18 +21,20 @@ public class Player : MonoBehaviour
     
     void Update()
     {
-        RaycastHit hit; //declare raycast variable
-        if (Physics.Raycast(transform.position, transform.forward, out hit)) //draws raycast from player position in the forward direction and outputs hit objects through hit
-        {
-            if (hit.transform.GetComponent<Button> () != null) //if the hit object is the button
-            {
-                hit.transform.GetComponent<Button> () .OnLook(); //onlook function from button called
-                MoveToHouse();
-            }
-        }
+        /*___look at button to activate____*/
+        //RaycastHit hit; //declare raycast variable
+        //if (Physics.Raycast(transform.position, transform.forward, out hit)) //draws raycast from player position in the forward direction and outputs hit objects through hit
+        //{
+        //    if (hit.transform.GetComponent<Button> () != null) //if the hit object is the button
+        //    {
+        //        hit.transform.GetComponent<Button> () .OnLook(); //onlook function from button called
+        //        MoveToHouse();
+        //    }
+        //}
 
         gameObject.transform.parent.position = Vector3.Lerp(gameObject.transform.parent.position, targetPosition, Time.deltaTime * playerSpeed);
 
+        /*___point at button to activate____*/
         bool gripActive = SteamVR_Actions.default_GrabGrip.GetState(handType);
         RaycastHit gripHit;
         if (gripActive)
@@ -43,6 +45,11 @@ public class Player : MonoBehaviour
                 {
                     gripHit.transform.GetComponent<Button>().OnLook(); //onlook function from button called
                     MoveToHouse();
+                }
+
+                if (gripHit.transform.tag == "evil")
+                {
+                    Destroy(gripHit.transform.gameObject);
                 }
             }
             rightLaser.transform.gameObject.SetActive(true);

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 718468763017666570}
   m_Layer: 0
   m_Name: evilMan
-  m_TagString: Untagged
+  m_TagString: evil
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
