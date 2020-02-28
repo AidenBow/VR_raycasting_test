@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public SteamVR_Input_Sources handType;
     private GameObject rightController;
     private GameObject rightLaser;
+    public bool enteredCastle = false;
     void Start()
     {
         targetPosition = gameObject.transform.parent.position;
@@ -45,6 +46,7 @@ public class Player : MonoBehaviour
                 {
                     gripHit.transform.GetComponent<Button>().OnLook(); //onlook function from button called
                     MoveToHouse();
+                    enteredCastle = true;
                 }
 
                 if (gripHit.transform.tag == "evil")
